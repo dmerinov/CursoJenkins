@@ -1,0 +1,23 @@
+pipeline {
+    agent {
+        label 'minion2'
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '7',
+                                  daysToKeepStr: '10')
+    }
+
+    parameters{
+        string(name: 'VERSION', defaultValue: 'SNAPSHOT',
+        description: 'version de la app que queremos desplegar')
+    }
+
+    stages{
+        stage(''){
+            steps {
+                CleanWs()
+            }
+        }
+    }
+}
