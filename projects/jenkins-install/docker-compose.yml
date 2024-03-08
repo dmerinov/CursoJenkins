@@ -1,20 +1,54 @@
 version: '3.8'
 
 services:
-  knowmadmood-jenkins:
+  knowmadmood-jenkins-master:
     build: 
-      context: ./knowmadmood-jenkins
-    image: knowmadmood/jenkins:1.0.0
-    container_name: knowmadmood-jenkins
+      context: ./knowmadmood-jenkins-master
+    image: knowmadmood/jenkins-master:1.0.0
+    container_name: knowmadmood-jenkins-master
     ports:
       #notación vectorial. se pone porque un sistema puede tener varios puertos.
       #a la derecha es a partir del puerto en el que se instancias las imágenes. El de la izquierda
       #simboliza el operador, que es el que organiza laso cosas.
       - "8081:8080"
     volumes:
-      - knowmadmood-jenkins:/Users/dmerinov/Desktop/CursoJenkins/linkVirtual
+      - knowmadmood-jenkins-master:/Users/dmerinov/Desktop/CursoJenkins/linkVirtual
+    restart: always
+########
+  knowmadmood-jenkins-minion1:
+    build: 
+      context: ./knowmadmood-jenkins-minion1
+    image: knowmadmood/jenkins-minion1:1.0.0
+    container_name: knowmadmood-jenkins-minion1
+    ports:
+      #notación vectorial. se pone porque un sistema puede tener varios puertos.
+      #a la derecha es a partir del puerto en el que se instancias las imágenes. El de la izquierda
+      #simboliza el operador, que es el que organiza laso cosas.
+      - "8082:8080"
+    volumes:
+      - knowmadmood-jenkins-minion1:/Users/dmerinov/Desktop/CursoJenkins/linkVirtual
+    restart: always
+#######
+  knowmadmood-jenkins-minion2:
+    build: 
+      context: ./knowmadmood-jenkins-minion2
+    image: knowmadmood/jenkins-minion2:1.0.0
+    container_name: knowmadmood-jenkins-minion2
+    ports:
+      #notación vectorial. se pone porque un sistema puede tener varios puertos.
+      #a la derecha es a partir del puerto en el que se instancias las imágenes. El de la izquierda
+      #simboliza el operador, que es el que organiza laso cosas.
+      - "8083:8080"
+    volumes:
+      - knowmadmood-jenkins-minion2:/Users/dmerinov/Desktop/CursoJenkins/linkVirtual
     restart: always
 
 volumes:
   knowmadmood-jenkins:
     name: knowmadmood-jenkins
+
+  knowmadmood-jenkins-minion1:
+    name: knowmadmood-jenkins-minion1
+
+  knowmadmood-jenkins-minion2:
+    name: knowmadmood-jenkins-minion2

@@ -1,0 +1,24 @@
+docker compose sencillo:
+
+version: '3.8'
+
+services:
+  knowmadmood-jenkins:
+    build: 
+      context: ./knowmadmood-jenkins
+    image: knowmadmood/jenkins:1.0.0
+    container_name: knowmadmood-jenkins
+    ports:
+      #notación vectorial. se pone porque un sistema puede tener varios puertos.
+      #a la derecha es a partir del puerto en el que se instancias las imágenes. El de la izquierda
+      #simboliza el operador, que es el que organiza laso cosas.
+      - "8081:8080"
+    volumes:
+      - knowmadmood-jenkins:/Users/dmerinov/Desktop/CursoJenkins/linkVirtual
+    restart: always
+
+volumes:
+  knowmadmood-jenkins:
+    name: knowmadmood-jenkins
+
+-----------------------
