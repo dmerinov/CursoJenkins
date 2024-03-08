@@ -44,8 +44,8 @@ services:
     restart: always
 
 volumes:
-  knowmadmood-jenkins:
-    name: knowmadmood-jenkins
+  knowmadmood-jenkins-master:
+    name: knowmadmood-jenkins-master
 
   knowmadmood-jenkins-minion1:
     name: knowmadmood-jenkins-minion1
