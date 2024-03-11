@@ -1,11 +1,10 @@
 pipeline {
-    agent {
-        label 'minion2'
-    }
+    agent any
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '7',
-                                  daysToKeepStr: '10')
+                                  daysToKeepStr: '10'))
+        timestamps()
     }
 
     parameters{
@@ -14,10 +13,59 @@ pipeline {
     }
 
     stages{
-        stage(''){
+        stage('Clean WorkSpace'){
             steps {
-                CleanWs()
+                cleanWs()
+            }
+        }
+
+        stage('Maven Verify'){
+            steps {
+                println "mvn verify"
+            }
+        }
+
+        stage('Maven Test'){
+            steps {
+                println "mvn test"
+            }
+        }
+
+        stage('Maven Install'){
+            steps {
+                println "mvn install"
+            }
+        }
+
+        stage('Create file'){
+            steps {
+                sh 'touch file1.txt'
+            }
+        
+        }
+        stage('Create custom file'){
+            steps {
+                sh 'touch file-$VERSION.txt'
             }
         }
     }
+
+  /*  post {
+
+        always {
+            ChuckNorris()
+        }
+
+        success {
+
+        }
+
+        failure {
+
+        }
+
+        aborted {
+
+        } 
+    }*/
 }
